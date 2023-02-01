@@ -6,6 +6,6 @@ use App\Http\Controllers\LogController;
 
 Route::get('/loglist', [LogController::class, 'display']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
