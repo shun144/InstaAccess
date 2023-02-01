@@ -17,6 +17,29 @@ class LogController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function display()
+    {
+        $csv_dir_path = public_path().DIRECTORY_SEPARATOR.'log';
+
+        $csvs = glob($csv_dir_path.DIRECTORY_SEPARATOR.'*.csv');
+        $csv_arr = [];
+        for($i = 0; $i < count($csvs); ++$i) {
+            $csv_name = basename($csvs[$i]);
+            $csv_arr[$csv_name] = url('log'.DIRECTORY_SEPARATOR.$csv_name);
+        }
+
+        // 降順ソート
+        arsort($csv_arr);
+        return view('log.list', compact('csv_arr'));
+    }
+
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
